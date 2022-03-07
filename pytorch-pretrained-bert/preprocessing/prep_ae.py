@@ -66,7 +66,7 @@ def parse_SemEval14(fn):
                     pt+=1
         corpus[int(sent.attrib['id'])]={"tokens": tokens, "labels": lb}
     print (opin_cnt)
-    print len(corpus)
+    print (len(corpus))
     return corpus
 
 
