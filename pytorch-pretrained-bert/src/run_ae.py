@@ -224,13 +224,13 @@ def main():
     parser.add_argument("--bert_model", default='bert-base', type=str)
 
     parser.add_argument("--data_dir",
-                        default=None,
+                        default="as/",
                         type=str,
                         required=True,
-                        help="The input data dir containing json files.")
+                        help="as/")
 
     parser.add_argument("--output_dir",
-                        default=None,
+                        default="as/",
                         type=str,
                         required=True,
                         help="The output directory where the model predictions and checkpoints will be written.")
