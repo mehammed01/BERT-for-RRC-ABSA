@@ -217,15 +217,15 @@ def main():
                              "Sequences longer than this will be truncated, and sequences shorter \n"
                              "than this will be padded.")
     parser.add_argument("--do_train",
-                        default=False,
+                        default=True,
                         action='store_true',
                         help="Whether to run training.")
     parser.add_argument("--do_valid",
-                        default=False,
+                        default=True,
                         action='store_true',
                         help="Whether to run training.")
     parser.add_argument("--do_eval",
-                        default=False,
+                        default=True,
                         action='store_true',
                         help="Whether to run eval on the dev set.")
     
