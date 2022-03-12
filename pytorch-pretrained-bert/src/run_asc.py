@@ -200,13 +200,13 @@ def main():
     parser.add_argument("--data_dir",
                         default=None,
                         type=str,
-                        required=True,
+                        required=False,
                         help="The input data dir containing json files.")
 
     parser.add_argument("--output_dir",
                         default=None,
                         type=str,
-                        required=True,
+                        required=False,
                         help="The output directory where the model predictions and checkpoints will be written.")
 
     ## Other parameters
