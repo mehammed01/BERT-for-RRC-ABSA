@@ -230,7 +230,7 @@ def main():
                         help="Whether to run eval on the dev set.")
     
     parser.add_argument("--train_batch_size",
-                        default=32,
+                        default=16,
                         type=int,
                         help="Total batch size for training.")
     parser.add_argument("--eval_batch_size",
