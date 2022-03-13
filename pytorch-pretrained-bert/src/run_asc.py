@@ -230,7 +230,7 @@ def main():
                         help="Whether to run eval on the dev set.")
     
     parser.add_argument("--train_batch_size",
-                        default=16,
+                        default=32,
                         type=int,
                         help="Total batch size for training.")
     parser.add_argument("--eval_batch_size",
@@ -238,12 +238,12 @@ def main():
                         type=int,
                         help="Total batch size for eval.")
     parser.add_argument("--learning_rate",
-                        default=5e-5,
+                        default=3e-5,
                         type=float,
                         help="The initial learning rate for Adam.")
     
     parser.add_argument("--num_train_epochs",
-                        default=6,
+                        default=7,
                         type=int,
                         help="Total number of training epochs to perform.")
     parser.add_argument("--warmup_proportion",
