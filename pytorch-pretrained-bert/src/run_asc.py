@@ -47,7 +47,8 @@ def warmup_linear(x, warmup=0.002):
 def train(args):
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = ABSATokenizer.from_pretrained("bert-base-uncased")
+    tokenizer = ABSATokenizer.from_pretrained("aubmindlab/bert-base-arabertv01")
+    print(5)
     train_examples = processor.get_train_examples(args.data_dir)
     num_train_steps = int(len(train_examples) / args.train_batch_size) * args.num_train_epochs
 
