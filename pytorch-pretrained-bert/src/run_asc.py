@@ -47,7 +47,7 @@ def warmup_linear(x, warmup=0.002):
 def train(args):
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = ABSATokenizer.from_pretrained("aubmindlab/bert-base-arabertv01")
+    tokenizer = ABSATokenizer.from_pretrained("bert-base-multilingual-uncased")
     print(5)
     train_examples = processor.get_train_examples(args.data_dir)
     num_train_steps = int(len(train_examples) / args.train_batch_size) * args.num_train_epochs
@@ -92,7 +92,7 @@ def train(args):
         valid_losses=[]
     #<<<<< end of validation declaration
 
-    model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels = len(label_list) )
+    model = BertForSequenceClassification.from_pretrained("bert-base-multilingual-uncased", num_labels = len(label_list) )
     model.cuda()
     # Prepare optimizer
     param_optimizer = [(k, v) for k, v in model.named_parameters() if v.requires_grad==True]
@@ -152,7 +152,7 @@ def train(args):
 def test(args):  # Load a trained model that you have fine-tuned (we assume evaluate on cpu)    
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+    tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-uncased")
     eval_examples = processor.get_test_examples(args.data_dir)
     eval_features = data_utils.convert_examples_to_features(eval_examples, label_list, args.max_seq_length, tokenizer, "asc")
 
