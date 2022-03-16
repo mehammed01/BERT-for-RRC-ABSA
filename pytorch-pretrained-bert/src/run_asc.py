@@ -118,7 +118,8 @@ def train(args):
             batch = tuple(t.cuda() for t in batch)
             input_ids, segment_ids, input_mask, label_ids = batch
             print(input_ids, segment_ids, input_mask, label_ids)
-            loss = model(input_ids, segment_ids, input_mask, label_ids)
+            outputs = model(input_ids, segment_ids, input_mask, label_ids)
+            loss = outputs[0]
             
             loss.backward()
 
