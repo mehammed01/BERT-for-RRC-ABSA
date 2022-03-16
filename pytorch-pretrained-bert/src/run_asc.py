@@ -24,10 +24,11 @@ import numpy as np
 import torch
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 
-from pytorch_pretrained_bert.tokenization import BertTokenizer
-from pytorch_pretrained_bert.modeling import BertForSequenceClassification
-from pytorch_pretrained_bert.optimization import BertAdam
-
+#from pytorch_pretrained_bert.tokenization import BertTokenizer
+#from pytorch_pretrained_bert.modeling import BertForSequenceClassification
+#from pytorch_pretrained_bert.optimization import BertAdam
+from transformers import BertModel, BertTokenizer, AdamW, get_linear_schedule_with_warmup
+from transformers import BertForSequenceClassification
 import absa_data_utils as data_utils
 from absa_data_utils import ABSATokenizer
 import modelconfig
@@ -47,7 +48,7 @@ def warmup_linear(x, warmup=0.002):
 def train(args):
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = ABSATokenizer.from_pretrained("bert-base-multilingual-uncased")
+    tokenizer = ABSATokenizer.from_pretrained("asafaya/bert-base-arabic")
     print(5)
     train_examples = processor.get_train_examples(args.data_dir)
     num_train_steps = int(len(train_examples) / args.train_batch_size) * args.num_train_epochs
@@ -92,7 +93,7 @@ def train(args):
         valid_losses=[]
     #<<<<< end of validation declaration
 
-    model = BertForSequenceClassification.from_pretrained("bert-base-multilingual-uncased", num_labels = len(label_list) )
+    model = BertForSequenceClassification.from_pretrained("asafaya/bert-base-arabic", num_labels = len(label_list) )
     model.cuda()
     # Prepare optimizer
     param_optimizer = [(k, v) for k, v in model.named_parameters() if v.requires_grad==True]
@@ -103,10 +104,10 @@ def train(args):
         {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
         ]
     t_total = num_train_steps
-    optimizer = BertAdam(optimizer_grouped_parameters,
-                         lr=args.learning_rate,
-                         warmup=args.warmup_proportion,
-                         t_total=t_total)
+    #optimizer = BertAdam(optimizer_grouped_parameters,lr=args.learning_rate,warmup=args.warmup_proportion,t_total=t_total)
+    optimizer = AdamW(model.parameters(), lr=2e-5, correct_bias=False)
+
+    
 
     global_step = 0
     model.train()
@@ -152,7 +153,7 @@ def train(args):
 def test(args):  # Load a trained model that you have fine-tuned (we assume evaluate on cpu)    
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-uncased")
+    tokenizer = BertTokenizer.from_pretrained("asafaya/bert-base-arabic")
     eval_examples = processor.get_test_examples(args.data_dir)
     eval_features = data_utils.convert_examples_to_features(eval_examples, label_list, args.max_seq_length, tokenizer, "asc")
 
