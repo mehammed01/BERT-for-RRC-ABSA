@@ -94,7 +94,7 @@ def train(args):
     #<<<<< end of validation declaration
 
     model = BertForSequenceClassification.from_pretrained("asafaya/bert-base-arabic", num_labels = len(label_list) )
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     #model.to(device)
     model.cuda()
     # Prepare optimizer
