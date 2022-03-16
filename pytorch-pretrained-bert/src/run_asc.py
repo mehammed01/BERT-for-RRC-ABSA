@@ -115,7 +115,7 @@ def train(args):
         for step, batch in enumerate(train_dataloader):
             batch = tuple(t.cuda() for t in batch)
             input_ids, segment_ids, input_mask, label_ids = batch
-            loss = model(input_ids, segment_ids, input_mask, label_ids)
+            loss = model(batch)
             loss.backward()
 
             lr_this_step = args.learning_rate * warmup_linear(global_step/t_total, args.warmup_proportion)
