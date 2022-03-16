@@ -113,6 +113,7 @@ def train(args):
         for step, batch in enumerate(train_dataloader):
             batch = tuple(t.cuda() for t in batch)
             input_ids, segment_ids, input_mask, label_ids = batch
+            print(input_ids, segment_ids, input_mask, label_ids)
             loss = model(input_ids, segment_ids, input_mask, label_ids)
             loss.backward()
 
