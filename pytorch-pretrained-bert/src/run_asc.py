@@ -117,7 +117,7 @@ def train(args):
         for step, batch in enumerate(train_dataloader):
             batch = tuple(t.cuda() for t in batch)
             input_ids, segment_ids, input_mask, label_ids = batch
-            print(input_ids, segment_ids, input_mask, label_ids)
+            
             outputs  = model(input_ids, attention_mask=input_mask, token_type_ids=segment_ids, labels=label_ids)
             loss = outputs[0]
             loss.backward()
@@ -185,7 +185,7 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
         input_ids, segment_ids, input_mask, label_ids = batch
         
         with torch.no_grad():
-            logits = model(input_ids, segment_ids, input_mask)
+            logits = model(input_ids, segment_ids, input_mask)[0]
 
         logits = logits.detach().cpu().numpy()
         label_ids = label_ids.cpu().numpy()
