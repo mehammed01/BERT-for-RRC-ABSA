@@ -137,7 +137,8 @@ def train(args):
                 for step, batch in enumerate(valid_dataloader):
                     batch = tuple(t.cuda() for t in batch) # multi-gpu does scattering it-self
                     input_ids, segment_ids, input_mask, label_ids = batch
-                    loss = model(input_ids, segment_ids, input_mask, label_ids)
+                    outputs  = model(input_ids, attention_mask=input_mask, token_type_ids=segment_ids, labels=label_ids)
+                    loss = outputs[0]
                     losses.append(loss.data.item()*input_ids.size(0) )
                     valid_size+=input_ids.size(0)
                 valid_loss=sum(losses)/valid_size
