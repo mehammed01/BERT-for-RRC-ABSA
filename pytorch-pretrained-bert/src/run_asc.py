@@ -104,7 +104,7 @@ def train(args):
         {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)], 'weight_decay': 0.01},
         {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
         ]
-    t_total = 4500
+    t_total = 3500
     #optimizer = BertAdam(optimizer_grouped_parameters,lr=args.learning_rate,warmup=args.warmup_proportion,t_total=t_total)
     optimizer = AdamW(model.parameters(), lr=2e-5, correct_bias=False)
 
