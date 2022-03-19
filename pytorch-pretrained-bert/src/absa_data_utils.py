@@ -155,7 +155,7 @@ class AscProcessor(DataProcessor):
         examples = []
         for (i, ids) in enumerate(lines):
             guid = "%s-%s" % (set_type, ids )
-            text_a = lines[ids]['term']
+            text_a = lines[ids]['target']
             text_b = lines[ids]['sentence']
             label = lines[ids]['polarity']
             examples.append(
