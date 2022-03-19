@@ -48,7 +48,7 @@ def warmup_linear(x, warmup=0.002):
 def train(args):
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = ABSATokenizer.from_pretrained("asafaya/bert-base-arabic")
+    tokenizer = ABSATokenizer.from_pretrained("aubmindlab/bert-base-arabertv2")
     train_examples = processor.get_train_examples(args.data_dir)
     num_train_steps = int(len(train_examples) / args.train_batch_size) * args.num_train_epochs
 
@@ -92,7 +92,7 @@ def train(args):
         valid_losses=[]
     #<<<<< end of validation declaration
 
-    model = BertForSequenceClassification.from_pretrained("asafaya/bert-base-arabic", num_labels = len(label_list) )
+    model = BertForSequenceClassification.from_pretrained("aubmindlab/bert-base-arabertv2", num_labels = len(label_list) )
     #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     #model.to(device)
     model.cuda()
@@ -158,7 +158,7 @@ def train(args):
 def test(args):  # Load a trained model that you have fine-tuned (we assume evaluate on cpu)    
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = BertTokenizer.from_pretrained("asafaya/bert-base-arabic")
+    tokenizer = BertTokenizer.from_pretrained("aubmindlab/bert-base-arabertv2")
     eval_examples = processor.get_test_examples(args.data_dir)
     eval_features = data_utils.convert_examples_to_features(eval_examples, label_list, args.max_seq_length, tokenizer, "asc")
 
