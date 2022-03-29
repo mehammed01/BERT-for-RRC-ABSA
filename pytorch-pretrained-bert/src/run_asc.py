@@ -205,7 +205,7 @@ def main():
     parser.add_argument("--bert_model", default='bert-base', type=str)
 
     parser.add_argument("--data_dir",
-                        default="data/news",
+                        default="data/HAAD_NORM",
                         type=str,
                         required=False,
                         help="The input data dir containing json files.")
